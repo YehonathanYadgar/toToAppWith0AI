@@ -1,0 +1,13 @@
+h1 {
+    text-align: center;
+}
+
+#AddTaskDiv {
+  width: 49%;
+  margin-left: 45%;
+}
+
+#TaskList {
+  width: 49%;
+  margin-left: 45%;
+}
