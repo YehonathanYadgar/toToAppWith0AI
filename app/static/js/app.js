@@ -5,23 +5,32 @@ const TaskText = document.getElementById('TaskText');
 const TaskList = document.getElementById('TaskList');
 
 AddTaskButton.onclick = function() {
+    
     const Text = TaskText.value.trim();
     if (Text === "") return;
 
     const NewListItem = document.createElement('li');  
     NewListItem.textContent = Text;
 
-    // Create a delete button
     const DeleteButton = document.createElement('button');
     DeleteButton.textContent = "Delete";
+
+    const EditButton = document.createElement('button');
+    EditButton.textContent = "Edit";
+
+    EditButton.onclick = function() {
+        NewTaskText = prompt("Please enter the new task");
+        NewTaskText = NewTaskText.trim()
+        NewListItem.textContent = NewTaskText;
+    };
+
     DeleteButton.onclick = function() {
         TaskList.removeChild(NewListItem);
     };
 
-    // Add the delete button to the list item
     NewListItem.appendChild(DeleteButton);
+    NewListItem.appendChild(EditButton);
 
-    // Add the new list item to the task list
     TaskList.appendChild(NewListItem);
 
     TaskText.value = "";
