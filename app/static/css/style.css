@@ -11,3 +11,7 @@ h1 {
   width: 49%;
   margin-left: 45%;
 }
+
+#DeleteTaskButton {
+  margin-left: 5px;
+}

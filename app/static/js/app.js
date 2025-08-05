@@ -10,10 +10,16 @@ AddTaskButton.onclick = function() {
     if (Text === "") return;
 
     const NewListItem = document.createElement('li');  
-    NewListItem.textContent = Text;
+    const TextArea = document.createElement('span');  
+    
+    NewListItem.appendChild(TextArea)
+
+
+    TextArea.textContent = Text;
 
     const DeleteButton = document.createElement('button');
     DeleteButton.textContent = "Delete";
+    DeleteButton.id = "DeleteTaskButton";
 
     const EditButton = document.createElement('button');
     EditButton.textContent = "Edit";
@@ -21,7 +27,7 @@ AddTaskButton.onclick = function() {
     EditButton.onclick = function() {
         NewTaskText = prompt("Please enter the new task");
         NewTaskText = NewTaskText.trim()
-        NewListItem.textContent = NewTaskText;
+        TextArea.textContent = NewTaskText;
     };
 
     DeleteButton.onclick = function() {
