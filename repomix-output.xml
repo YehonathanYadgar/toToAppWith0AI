@@ -1,0 +1,168 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+app/main.py
+app/static/css/style.css
+app/static/js/app.js
+app/templates/index.html
+notes.md
+requirements.txt
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="notes.md">
+uvicorn main:app --reload
+</file>
+
+<file path="requirements.txt">
+fastapi
+</file>
+
+<file path="app/main.py">
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+
+app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/", response_class=HTMLResponse)
+async def read_root(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+</file>
+
+<file path="app/static/css/style.css">
+h1 {
+    text-align: center;
+}
+
+#AddTaskDiv {
+  width: 49%;
+  margin-left: 45%;
+}
+
+#TaskList {
+  width: 49%;
+  margin-left: 45%;
+}
+
+#DeleteTaskButton {
+  margin-left: 5px;
+}
+</file>
+
+<file path="app/templates/index.html">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="/static/css/style.css">
+        <script src="/static/js/app.js" defer></script>
+    </head>
+
+<body>
+    <h1>To do list</h1>
+    <div id="AddTaskDiv">
+        <button id="AddTaskButton">+</button>
+        <input type="text" id="TaskText" placeholder="Enter a new task">
+    </div>
+
+    <ul id="TaskList"></ul>
+</body>
+
+</html>
+</file>
+
+<file path="app/static/js/app.js">
+const AddTaskButton = document.getElementById('AddTaskButton');
+const TaskText = document.getElementById('TaskText');
+
+const TaskList = document.getElementById('TaskList');
+
+AddTaskButton.onclick = function() {
+    
+    const Text = TaskText.value.trim();
+    if (Text === "") return;
+
+    const NewListItem = document.createElement('li');  
+    const TextArea = document.createElement('span');  
+    
+    NewListItem.appendChild(TextArea)
+
+
+    TextArea.textContent = Text;
+
+    const DeleteButton = document.createElement('button');
+    DeleteButton.textContent = "Delete";
+    DeleteButton.id = "DeleteTaskButton";
+
+    const EditButton = document.createElement('button');
+    EditButton.textContent = "Edit";
+
+    EditButton.onclick = function() {
+        NewTaskText = prompt("Please enter the new task");
+        NewTaskText = NewTaskText.trim()
+        TextArea.textContent = NewTaskText;
+    };
+
+    DeleteButton.onclick = function() {
+        TaskList.removeChild(NewListItem);
+    };
+
+    NewListItem.appendChild(DeleteButton);
+    NewListItem.appendChild(EditButton);
+
+    TaskList.appendChild(NewListItem);
+
+    TaskText.value = "";
+};
+</file>
+
+</files>
